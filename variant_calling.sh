@@ -24,8 +24,6 @@ NORMAL_SAMPLENAME=${NORMAL_SAMPLENAME//_bqsr.bam/};
 
 echo $TUMOUR, $NORMAL, $NORMAL_SAMPLENAME
 
-#java -Xmx16g -jar $GATK_HOME/gatk-package-4.2.5.0-local.jar HaplotypeCaller -R $DIR/hg38.fa -I $TUMOUR  -O $DIR/${TUMOUR_SAMPLENAME}.vcf.gz
-
 java -Xmx16g -jar $GATK_HOME/gatk-package-4.2.5.0-local.jar Mutect2 -R $DIR/hg38.fa -I $TUMOUR -I $NORMAL -normal $NORMAL_SAMPLENAME -O $DIR/somatic_${TUMOUR_SAMPLENAME}.vcf.gz --germline-resource $DIR/somatic-hg38_af-only-gnomad.hg38.vcf.gz --panel-of-normals $DIR/somatic-hg38_1000g_pon.hg38.vcf.gz 
 
 done
