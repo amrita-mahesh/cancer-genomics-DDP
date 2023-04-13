@@ -1,0 +1,5 @@
+#Configs for snakemake workflow
+
+#Path to GATK jar file and Picard jar file
+gatk_home: "/data/amrita/tools/gatk-4.2.5.0"
+picard_home: "/data/amrita/tools"
