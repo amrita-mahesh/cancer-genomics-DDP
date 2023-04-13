@@ -1,10 +1,48 @@
-<h1>Systematic analysis of Indian pancreatic cancer genomes</h1>
 
-This repository documents all the code for my Dual Degree project. This pipeline is designed to call SNPs and indels from a set of given tumour and normal samples.
+<!-- ABOUT -->
+## About The Project
 
-<h2>Setting up the pipeline</h2>
-The configs/config.yaml file should be updates with the location to the GATK and Picard .jar files. The <i>reference_files</i> folder should contain links to the reference genome (in this case, hg38) along with index files for the reference genome. Additionally, the files for the panel of normals and germline resources are present in the <i>reference_files</i> folder. The <i>samples.csv</i> file can be updated with a list of sample names. The tumour and normal samples should be named {<i>sample-name</i>}t and {<i>sample-name</i>}p respectively. 
+This repository documents all the code for my dual degree project on the analysis of Indian pancreatic cancer data. This pipeline can be used to call somatic mutations from a set of paired tumour-normal samples. 
 
-<h2>Running the pipeline</h2>
-Running the pipeline generates four folders with raw BAM files, BAM files after base quality score recalibration, VCF files with variant calls, and VCF files after filtering with GATK's FilterMutectCalls.
+This Snakemake pipeline takes raw reads (FASTQ files) as input and generates BAM files, raw variant calls (VCF files) and a final filtered set of variants. 
+
+
+<!-- Setting up -->
+## Setting up
+
+1. Clone this repository.
+
+   ```sh
+   git clone https://github.com/amrita-mahesh/cancer-genomics-DDP
+   ```
+2. Download all the reference files required - this pipeline uses the hg38 build of the human genome.
+
+3. Create a conda environment 'fastp_env' to run fastp for quality control and read trimming.
+
+```sh
+conda create --name fastp_env
+
+conda activate fastp_env
+
+conda install -c bioconda fastp
+
+conda deactivate
+```
+
+### Running the pipeline
+
+* Navigate to the directory containing the Snakefile and create a 'samples' folder.
+
+  ```sh
+  mkdir samples
+  
+  ```
+  
+* Create a file configs/samples.csv that contains the names of the tumour samples. An example file is provided in the repository.
+
+* Run the snakemake pipeline with the specified number of cores.
+
+```sh
+snakemake --cores <number of cores> 
+```
 
